@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  name: Teste Cenário Inventory in Memory
+  gather_facts: true
+  tasks:
+
+    - name: create inventory in memory
+      add_host:
+        hostname: "{{ IP_HOST }}"
+        group: "{{ GROUPS }}"
+
+- name: Collect Facts by "{{ GROUPS }}"
+  hosts: "{{ GROUPS }}"
+  gather_facts: true
+  tasks:
+
+    - debug:
+        msg: "{{ inventory_hostname }}"
+
+    - debug:
+        msg: 
+          - "{{ ansible_facts.fqdn }}"    
+          - "{{ ansible_facts.hostname }}"
+          - "{{ ansible_facts.default_ipv4.address }}"
+          

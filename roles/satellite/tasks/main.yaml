@@ -11,6 +11,7 @@
 - name: Obter as variaveis de /etc/os-release
   set_fact: 
     content: "{{ lookup('file','/etc/os-release').splitlines() }}"
+  delegate_to: "{{ inventory_hostname }}"  
 
 - set_fact: 
     OSNAME: "{{ item[7].split('=')[1] }}"

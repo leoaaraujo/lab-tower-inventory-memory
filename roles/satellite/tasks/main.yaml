@@ -8,6 +8,9 @@
 - set_fact:
     FIP: "{{ ansible_facts.default_ipv4.address }}"
 
+- debug:
+    msg: "{{ lookup('file','/etc/os-release') }}"
+
 - name: Obter as variaveis de /etc/os-release
   set_fact: 
     content: "{{ lookup('file','/etc/os-release').splitlines() }}"

@@ -12,14 +12,5 @@
 - name: Collect Facts by "{{ GROUPS }}"
   hosts: "{{ GROUPS }}"
   gather_facts: true
-  tasks:
-
-    - debug:
-        msg: "{{ inventory_hostname }}"
-
-    - debug:
-        msg: 
-          - "{{ ansible_facts.fqdn }}"    
-          - "{{ ansible_facts.hostname }}"
-          - "{{ ansible_facts.default_ipv4.address }}"
-          
+  roles:
+    - satellite

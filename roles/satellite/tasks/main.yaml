@@ -1,0 +1,15 @@
+---
+- set_fact:
+    FNAME: "{{ ansible_facts.hostname }}"
+    
+- set_fact:
+    FHOSTNAME: "{{ ansible_facts.fqdn }}"
+
+- set_fact:
+    FIP: "{{ ansible_facts.default_ipv4.address }}"
+
+- debug:
+    msg:
+      - "{{ FNAME }}"
+      - "{{ FHOSTNAME }}"
+      - "{{ FIP }}"

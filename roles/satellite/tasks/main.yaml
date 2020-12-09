@@ -8,8 +8,30 @@
 - set_fact:
     FIP: "{{ ansible_facts.default_ipv4.address }}"
 
+- name: Obter as variaveis de /etc/os-release
+  set_fact: 
+    content: "{{ lookup('file','/etc/os-release').splitlines() }}"
+
+- set_fact: 
+    OSNAME: "{{ item[7].split('=')[1] }}"
+  loop: 
+    - "{{ content }}"
+
+- set_fact: 
+    VARIANT: "{{ item[4].split('=')[1] | replace('\"','') }}"
+  loop: 
+    - "{{ content }}"
+
+- set_fact: 
+    VERSION: "{{ item[6].split('=')[1] | replace('\"','') }}"
+  loop: 
+    - "{{ content }}"
+
 - debug:
     msg:
       - "{{ FNAME }}"
       - "{{ FHOSTNAME }}"
       - "{{ FIP }}"
+      - "{{ OSNAME }}"
+      - "{{ VARIANT | replace('\"','') }}"
+      - "{{ VERSION | replace('\"','') }}"
